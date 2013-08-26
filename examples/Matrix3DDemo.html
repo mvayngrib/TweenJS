@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TweenJS + Matrix3D</title>
+
+    <link rel="stylesheet" href="css/demoStyles.css"/>
+
+    <script type="text/javascript" src="lib/createjs/events/Event.js"></script>
+    <script type="text/javascript" src="lib/createjs/events/EventDispatcher.js"></script>
+    <script type="text/javascript" src="lib/Ticker.js"></script>
+    <script type="text/javascript" src="lib/tweenjs/Tween.js"></script>
+    <script type="text/javascript" src="lib/tweenjs/Ease.js"></script>
+    <script type="text/javascript" src="plugins/Matrix3DPlugin.js"></script>
+
+    <style>
+        .content {
+            position: relative;
+        }
+        .ball {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50px;
+            border: 1px solid #000;
+        }
+    </style>
+
+    <script>
+        function init() {
+			createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
+            createjs.Matrix3DPlugin.install(createjs.Tween);
+
+            var ball = document.createElement("div");
+            ball.className = "ball";
+			ball.style.transform = ball.style['-webkit-transform'] = ball.style['-moz-transform'] = 'matrix(2, 0, 0, 2, 50, 50)'; // matrix and matrix3d are supported
+            document.body.appendChild(ball);
+
+            ball.style.left = "200px";
+            ball.style.top = "100px";
+
+			var tween = createjs.Tween.get(ball, {loop: true}).to({transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [100, 100, 0, 1]]}, 1500, createjs.Ease.bounceOut)
+															  .to({transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]}, 1500, createjs.Ease.bounceOut);
+        }
+    </script>
+
+</head>
+<body onload="init()">
+</body>
+</html>

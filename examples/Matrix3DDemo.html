@@ -21,7 +21,7 @@
             width: 100px;
             height: 100px;
             background-color: red;
-            border-radius: 50px;
+            border-radius: 25px;
             border: 1px solid #000;
         }
     </style>
@@ -34,12 +34,13 @@
             var ball = document.createElement("div");
             ball.className = "ball";
 			ball.style.transform = ball.style['-webkit-transform'] = ball.style['-moz-transform'] = 'matrix(2, 0, 0, 2, 50, 50)'; // matrix and matrix3d are supported
+			//ball.style.transform = ball.style['-webkit-transform'] = ball.style['-moz-transform'] = 'matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 50, 50, 0, 1)'; // equivalent of above matrix(...) transform
             document.body.appendChild(ball);
 
             ball.style.left = "200px";
             ball.style.top = "100px";
 
-			var tween = createjs.Tween.get(ball, {loop: true}).to({transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [100, 100, 0, 1]]}, 1500, createjs.Ease.bounceOut)
+			var tween = createjs.Tween.get(ball, {loop: true}).to({transform: [[1, -1, 0, 0], [1, 1, 0, 0], [0, 0, 1, 0], [100, 100, 0, 1]]}, 1500, createjs.Ease.bounceOut)
 															  .to({transform: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]}, 1500, createjs.Ease.bounceOut);
         }
     </script>
